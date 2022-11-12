@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace pr6
 {
-    internal class BookCard
+    internal class BookCard : IBook, ICloneable, IComparable<BookCard>
     {
         public static int conditionsGood = 0;
         public static int conditionsNew = 0;
@@ -114,6 +114,25 @@ namespace pr6
 
             }
             Console.WriteLine("состояние: " + cond);
+        }
+
+        public object Clone()
+        {
+            BookCard bookCard = new BookCard()
+            {
+                ID = ID,
+                author = _author,
+                title = _title,
+                year = _year,
+                condition = _condition
+            };
+
+            return bookCard;
+        }
+
+        public int CompareTo(BookCard other)
+        {
+            return _year.CompareTo(other.year);
         }
     }
 }
